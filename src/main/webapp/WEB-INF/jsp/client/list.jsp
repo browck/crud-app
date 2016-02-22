@@ -26,18 +26,20 @@
                             <th>Company</th>
                             <th>Website</th>
                             <th>Phone Number</th>
+                            <th>Contacts</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${clients}" var="client">
                             <tr>
-                                <td>${client.companyName}</td>
-                                <td>${client.website}</td>
-                                <td>${client.phoneNumber}</td>
+                                <td>${client.key.companyName}</td>
+                                <td>${client.key.website}</td>
+                                <td>${client.key.phoneNumber}</td>
+                                <td>${client.value}</td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/client/edit/${client.clientId}">Edit Client</a>
-                                    <a href="${pageContext.request.contextPath}/client/delete/${client.clientId}">Delete Client</a>
+                                    <a href="${pageContext.request.contextPath}/client/edit/${client.key.clientId}">Edit Client</a>
+                                    <a href="${pageContext.request.contextPath}/client/delete/${client.key.clientId}">Delete Client</a>
                                 </td>
                             </tr>
                         </c:forEach>

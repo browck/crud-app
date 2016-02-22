@@ -1,7 +1,9 @@
 package com.aquent.crudapp.controller;
 
 import com.aquent.crudapp.domain.Client;
+import com.aquent.crudapp.domain.Person;
 import com.aquent.crudapp.service.ClientService;
+import com.aquent.crudapp.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for handling basic client management operations.
@@ -23,6 +27,7 @@ public class ClientController {
     public static final String COMMAND_DELETE = "Delete";
 
     @Inject private ClientService clientService;
+    @Inject private PersonService personService;
 
     /**
      * Renders the listing page.
@@ -32,7 +37,24 @@ public class ClientController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("client/list");
-        mav.addObject("clients", clientService.listClients());
+
+        List<Client> clientList = clientService.listClients();
+
+        Map<Client, String> clients = new HashMap<>(clientList.size());
+
+        for (Client client : clientList) {
+            List<Person> contacts = personService.getByClientId(client.getClientId());
+            String contactList = "";
+            for (Person person : contacts) {
+                contactList = contactList.concat(person.getFirstName() + " " + person.getLastName() + ", ");
+            }
+            if (contactList.length() > 0) {
+                contactList = contactList.substring(0, contactList.lastIndexOf(','));
+            }
+            clients.put(client, contactList);
+        }
+
+        mav.addObject("clients", clients);
         return mav;
     }
 

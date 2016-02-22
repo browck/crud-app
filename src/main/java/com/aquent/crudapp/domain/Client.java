@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
  */
 public class Client {
 
-    private Integer clientid;
+    private Integer clientId;
 
     @NotNull
     @Size(min = 1, max = 50, message = "Company name is required with maximum length of 50")
@@ -39,11 +39,11 @@ public class Client {
     private String zipCode;
 
     public Integer getClientId() {
-        return clientid;
+        return clientId;
     }
 
     public void setClientId(Integer clientId) {
-        this.clientid = clientId;
+        this.clientId = clientId;
     }
 
     public String getCompanyName() {

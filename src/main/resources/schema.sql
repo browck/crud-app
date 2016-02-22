@@ -1,5 +1,6 @@
 CREATE TABLE person (
     person_id integer IDENTITY,
+    client_id INTEGER,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
     email_address varchar(50) NOT NULL,
@@ -19,12 +20,4 @@ CREATE TABLE client (
     state varchar(2) NOT NULL,
     zip_code varchar(5) NOT NULL
 );
-
-CREATE TABLE person_client (
-    id integer IDENTITY,
-    person_id INTEGER NOT NULL,
-    client_id INTEGER NOT NULL,
-    FOREIGN KEY (person_id) REFERENCES person(person_id),
-    FOREIGN KEY (client_id) REFERENCES client(client_id)
-)
 

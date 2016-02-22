@@ -6,6 +6,7 @@
 
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,6 +49,13 @@
             <br/>
             <label for="zipCode">Zip Code:</label>
             <input type="text" name="zipCode" value="${person.zipCode}"/>
+            <br/>
+            <label for="clientId">Client:</label>
+            <form:select path="person.clientId">
+                <form:options items="${clientList}"
+                              itemLabel="companyName"
+                              itemValue="clientId"/>
+            </form:select>
             <br/>
             <input type="submit" name="Submit" value="Submit"/>
         </form>

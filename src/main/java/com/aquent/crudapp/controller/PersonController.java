@@ -1,10 +1,11 @@
 package com.aquent.crudapp.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.inject.Inject;
 
+import com.aquent.crudapp.domain.Client;
+import com.aquent.crudapp.service.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class PersonController {
     public static final String COMMAND_DELETE = "Delete";
 
     @Inject private PersonService personService;
+    @Inject private ClientService clientService;
 
     /**
      * Renders the listing page.
@@ -34,7 +36,16 @@ public class PersonController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("person/list");
-        mav.addObject("persons", personService.listPeople());
+        List<Person> people = personService.listPeople();
+        Map<Person, String> persons = new HashMap<>(people.size());
+        for (Person person : people) {
+            String clientName = "";
+            if (person.getClientId() != null) {
+                clientName = clientService.readClient(person.getClientId()).getCompanyName();
+            }
+            persons.put(person, clientName);
+        }
+        mav.addObject("persons", persons);
         return mav;
     }
 
@@ -82,7 +93,14 @@ public class PersonController {
     @RequestMapping(value = "edit/{personId}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable Integer personId) {
         ModelAndView mav = new ModelAndView("person/edit");
-        mav.addObject("person", personService.readPerson(personId));
+        Person currentPerson = personService.readPerson(personId);
+        mav.addObject("person", currentPerson);
+        mav.addObject("client", clientService.readClient(currentPerson.getClientId()));
+//        List<String> clientNames = new ArrayList<>();
+//        for (Client client : clientService.listClients()) {
+//            clientNames.add(client.getCompanyName());
+//        }
+        mav.addObject("clientList", clientService.listClients());
         mav.addObject("errors", new ArrayList<String>());
         return mav;
     }

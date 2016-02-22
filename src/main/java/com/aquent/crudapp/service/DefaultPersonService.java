@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import com.aquent.crudapp.data.dao.ClientDao;
+import com.aquent.crudapp.domain.Client;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +61,13 @@ public class DefaultPersonService implements PersonService {
     public void deletePerson(Integer id) {
         personDao.deletePerson(id);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Person> getByClientId(Integer id) {
+        return personDao.getByClientId(id);
+    }
+
 
     @Override
     public List<String> validatePerson(Person person) {

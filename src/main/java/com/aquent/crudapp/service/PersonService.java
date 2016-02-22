@@ -2,6 +2,7 @@ package com.aquent.crudapp.service;
 
 import java.util.List;
 
+import com.aquent.crudapp.domain.Client;
 import com.aquent.crudapp.domain.Person;
 
 /**
@@ -53,4 +54,12 @@ public interface PersonService {
      * @return list of error messages
      */
     List<String> validatePerson(Person person);
+
+    /**
+     * Find all People associated with a client
+     *
+     * @param clientId Client to find associated people for
+     * @return All People associated with the specified client
+     */
+    List<Person> getByClientId(Integer clientId);
 }
