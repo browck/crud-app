@@ -1,9 +1,3 @@
-<%-- 
-    Document   : list
-    Created on : Apr 22, 2011, 2:25:22 PM
-    Author     : FMilens
---%>
-
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions'%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -44,43 +38,12 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/home/landing">Home</a></li>
                     <li><a href="/person/list">People</a></li>
-                    <li class="active"><a href="/client/list">Clients</a></li>
+                    <li><a href="/client/list">Clients</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-        <p><a href="${pageContext.request.contextPath}/client/create" class="btn btn-default">Create New Client</a></p>
-        <c:choose>
-            <c:when test="${fn:length(clients) gt 0}">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Company</th>
-                            <th>Website</th>
-                            <th>Phone Number</th>
-                            <th>Contacts</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${clients}" var="client">
-                            <tr>
-                                <td>${client.key.companyName}</td>
-                                <td>${client.key.website}</td>
-                                <td>${client.key.phoneNumber}</td>
-                                <td>${client.value}</td>
-                                <td>
-                                    <a href="${pageContext.request.contextPath}/client/edit/${client.key.clientId}" class="btn btn-default">Edit</a>
-                                    <a href="${pageContext.request.contextPath}/client/delete/${client.key.clientId}" class="btn btn-default">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:when>
-            <c:otherwise>
-                <p>No results found.</p>
-            </c:otherwise>
-        </c:choose>
+        <h1>Welcome</h1>
+        <p>This is a simple CRUD application to manage Person to Client relationships.</p>
     </body>
 </html>
