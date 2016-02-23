@@ -17,6 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest JQuery 2-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- JQuery Validator -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -59,50 +61,53 @@
                 </c:forEach>
             </ul>
         </c:if>
-        <form action="${pageContext.request.contextPath}/client/create" class="form-horizontal" method="POST">
+        <form action="${pageContext.request.contextPath}/client/create" id="input-form" class="form-horizontal" method="POST">
             <div class="form-group">
                 <label for="companyName" class="control-label col-sm-2">Company Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="companyName" class="form-control" value="${client.companyName}"/>
+                    <input type="text" name="companyName" class="form-control" value="${client.companyName}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="website" class="control-label col-sm-2">Website:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="website" class="form-control" value="${client.website}"/>
+                    <input type="text" name="website" class="form-control" value="${client.website}" type="url" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="phoneNumber" class="control-label col-sm-2">Phone Number:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="phoneNumber" class="form-control" value="${client.phoneNumber}"/>
+                    <input type="text" name="phoneNumber" class="form-control" value="${client.phoneNumber}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="streetAddress" class="control-label col-sm-2">Street Address:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="streetAddress" class="form-control" value="${client.streetAddress}"/>
+                    <input type="text" name="streetAddress" class="form-control" value="${client.streetAddress}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="city" class="control-label col-sm-2">City:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="city" class="form-control" value="${client.city}"/>
+                    <input type="text" name="city" class="form-control" value="${client.city}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="state" class="control-label col-sm-2">State:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="state" class="form-control" value="${client.state}"/>
+                    <input type="text" name="state" class="form-control" value="${client.state}" minlength="2" maxlength="2" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="zipCode" class="control-label col-sm-2">Zip Code:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="zipCode" class="form-control" value="${client.zipCode}"/>
+                    <input type="text" name="zipCode" class="form-control" value="${client.zipCode}" minlength="5" maxlength="5" required/>
                 </div>
             </div>
             <input type="submit" name="Submit" class="btn btn-default" value="Submit"/>
         </form>
+        <script>
+            $('#input-form').validate();
+        </script>
     </body>
 </html>

@@ -18,6 +18,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest JQuery 2-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- JQuery Validator -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -60,48 +62,48 @@
                 </c:forEach>
             </ul>
         </c:if>
-        <form action="${pageContext.request.contextPath}/person/edit" class="form-horizontal" method="POST">
+        <form action="${pageContext.request.contextPath}/person/edit" id="input-form" class="form-horizontal" method="POST">
             <input type="hidden" name="personId" value="${person.personId}"/>
             <div class="form-group">
                 <label for="firstName"  class="control-label col-sm-2">First Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="firstName" class="form-control" value="${person.firstName}"/>
+                    <input type="text" name="firstName" class="form-control" value="${person.firstName}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastName" class="control-label col-sm-2">Last Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="lastName" class="form-control" value="${person.lastName}"/>
+                    <input type="text" name="lastName" class="form-control" value="${person.lastName}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="emailAddress" class="control-label col-sm-2">Email Address:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="emailAddress" class="form-control" value="${person.emailAddress}"/>
+                    <input type="text" name="emailAddress" class="form-control" value="${person.emailAddress}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="streetAddress" class="control-label col-sm-2">Street Address:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="streetAddress" class="form-control" value="${person.streetAddress}"/>
+                    <input type="text" name="streetAddress" class="form-control" value="${person.streetAddress}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="city" class="control-label col-sm-2">City:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="city" class="form-control" value="${person.city}"/>
+                    <input type="text" name="city" class="form-control" value="${person.city}" minlength="1" maxlength="50" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="state" class="control-label col-sm-2">State:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="state" class="form-control" value="${person.state}"/>
+                    <input type="text" name="state" class="form-control" value="${person.state}" minlength="2" maxlength="2" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="zipCode" class="control-label col-sm-2">Zip Code:</label>
                 <div class="col-sm-4">
-                    <input type="text" name="zipCode" class="form-control" value="${person.zipCode}"/>
+                    <input type="text" name="zipCode" class="form-control" value="${person.zipCode}" minlength="5" maxlength="5" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -116,5 +118,8 @@
             </div>
             <input type="submit" name="Submit" class="btn btn-default" value="Submit"/>
         </form>
+        <script>
+            $('#input-form').validate();
+        </script>
     </body>
 </html>
