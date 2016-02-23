@@ -22,7 +22,6 @@ public class ClientJdbcDao implements ClientDao {
 
     private static final String SQL_LIST_CLIENTS = "SELECT * FROM client ORDER BY company_name, client_id";
     private static final String SQL_READ_CLIENT = "SELECT * FROM client WHERE client_id = :clientId";
-    private static final String SQL_GET_BY_NAME = "SELECT * FROM client WHERE companyName = :companyName";
     private static final String SQL_DELETE_CLIENT = "DELETE FROM client WHERE client_id = :clientId";
     private static final String SQL_UPDATE_CLIENT = "UPDATE client SET (company_name, website, phone_number, street_address, city, state, zip_code)"
                                                   + " = (:companyName, :website, :phoneNumber, :streetAddress, :city, :state, :zipCode)"

@@ -96,10 +96,6 @@ public class PersonController {
         Person currentPerson = personService.readPerson(personId);
         mav.addObject("person", currentPerson);
         mav.addObject("client", clientService.readClient(currentPerson.getClientId()));
-//        List<String> clientNames = new ArrayList<>();
-//        for (Client client : clientService.listClients()) {
-//            clientNames.add(client.getCompanyName());
-//        }
         mav.addObject("clientList", clientService.listClients());
         mav.addObject("errors", new ArrayList<String>());
         return mav;

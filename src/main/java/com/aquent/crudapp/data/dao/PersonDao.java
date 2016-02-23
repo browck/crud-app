@@ -53,5 +53,12 @@ public interface PersonDao {
      */
     List<Person> getByClientId(Integer clientId);
 
+    /**
+     * Set the client ID for this person.
+     *
+     * // TODO: Allow client controller to update associated persons
+     * @param person Person the client is being set on
+     * @param clientId Client to assign for the associated person
+     */
     void setClientId(Person person, Integer clientId);
 }
